@@ -10,8 +10,63 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// prisma/schema.prisma
+
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  password String
+  createdAt DateTime @default(now())
+
+  items   Item[]
+  rentings Renting[]
+  reviews Review[]
+}
+
+model Item {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  ownerId     Int
+  createdAt   DateTime  @default(now())
+
+  owner       User      @relation(fields: [ownerId], references: [id])
+  rentings    Renting[]
+  categories  Category[]
+  reviews     Review[]   // Added the opposite relation field
+}
+
+model Renting {
+  id         Int       @id @default(autoincrement())
+  itemId     Int
+  requesterId Int
+  startDate  DateTime
+  endDate    DateTime
+  status     String
+  createdAt  DateTime  @default(now())
+
+  item       Item      @relation(fields: [itemId], references: [id])
+  requester  User      @relation(fields: [requesterId], references: [id])
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  itemId     Int
+  reviewerId Int
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+
+  item       Item     @relation(fields: [itemId], references: [id])
+  reviewer   User     @relation(fields: [reviewerId], references: [id])
+}
+
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  items     Item[]
 }
