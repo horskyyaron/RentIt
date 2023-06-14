@@ -1,5 +1,7 @@
 import { currentUser } from '@clerk/nextjs';
 import { UserButton } from "@clerk/nextjs";
+import { Mail, MailLock } from '@mui/icons-material';
+import { Badge } from '@mui/material';
 import Link from 'next/link';
 
 export default async function Navbar() {
