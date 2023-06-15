@@ -1,4 +1,3 @@
-
 export function formatSize(sizeInBytes: number) {
     const kilobyte = 1024;
     const megabyte = kilobyte * 1024;
