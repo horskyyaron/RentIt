@@ -21,7 +21,7 @@ export function ImageUploader() {
         accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
     });
 
-    const { startUpload, isUploading } = useUploadThing<string>({
+    const { startUpload, isUploading } = useUploadThing({
         endpoint: "imageUploader", // replace this with an actual endpoint name
         onClientUploadComplete: () => {
             alert("uploaded successfully!");
