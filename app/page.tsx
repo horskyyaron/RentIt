@@ -1,6 +1,11 @@
-export default function Home() {
+import { currentUser } from "@clerk/nextjs"
+export default async function Home() {
+    const user = await currentUser()
     return (
-        <h1></h1>
+        <div>
+            <h1>Welcome to RentIT!</h1>
+            {user && <h2>logged in!!!!</h2>}
+        </div>
     )
 }
 
