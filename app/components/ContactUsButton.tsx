@@ -2,7 +2,7 @@
 
 import { experimental_useFormStatus as useFormStatus } from "react-dom"
 
-export default function SendMsgButton() {
+export default function ContactUsButton() {
 
   const { pending } = useFormStatus()
 
