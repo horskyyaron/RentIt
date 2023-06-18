@@ -24,7 +24,7 @@ export default async function Contact() {
 
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen" >
+        <div className="flex flex-col items-center justify-center mt-5" >
             <h1 className="text-4xl font-bold mb-8 ">Contact Us</h1>
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-xl w-4/5 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
                 <form action={sendEmail}>
@@ -63,7 +63,7 @@ export default async function Contact() {
                             placeholder="Enter your message"
                         ></textarea>
                     </div>
-                    <ContactUsButton />
+                    <ContactUsButton label="Send Message!"/>
                 </form>
             </div>
         </div>
