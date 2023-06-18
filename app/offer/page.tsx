@@ -1,4 +1,3 @@
-import AddCategory from "../components/AddCategory";
 import SubmitFormButton from "../components/ContactUsButton"
 import { ImageUploader } from "../components/ImageUploader";
 
