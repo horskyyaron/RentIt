@@ -11,19 +11,33 @@ datasource db {
 }
 
 model User {
-    id    Int    @id @default(autoincrement())
-    name  String
-    items Item[]
-    clerk_id String
+    clerkId          String             @id @unique
+    items            Item[]
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    RentingQueryCard RentingQueryCard[]
 }
 
 model Item {
-    id          Int    @id @default(autoincrement())
-    name        String
-    description String
-    price       Float
-    category    String
-    image       String 
-    ownerId     Int    @map("owner_id")
-    owner       User   @relation(fields: [ownerId], references: [id])
+    id               Int                @id @default(autoincrement())
+    name             String
+    description      String
+    rentPerDay       Float
+    ownerId          String // Changed to use `String` as the type
+    owner            User               @relation(fields: [ownerId], references: [clerkId])
+    images           String[]
+    createdAt        DateTime           @default(now())
+    updatedAt        DateTime           @updatedAt
+    RentingQueryCard RentingQueryCard[]
+}
+
+model RentingQueryCard {
+    id         Int      @id @default(autoincrement())
+    query      String
+    itemId     Int
+    item       Item     @relation(fields: [itemId], references: [id])
+    proposerId String // Changed to use `String` as the type
+    proposer   User     @relation(fields: [proposerId], references: [clerkId])
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 }

@@ -17,6 +17,7 @@ function cn(...classes: string[]) {
 
 function BlurImage({ img_url }: { img_url: string }) {
     const [isLoading, setLoading] = useState(true)
+
     return (
         <Link href="#" className="group">
             <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">

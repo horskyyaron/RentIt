@@ -1,25 +1,29 @@
 import { mailOptions, transporter } from "../api/nodemailer";
-import ContactUsButton from "../components/ContactUsButton"
+import SubmitFormButton from "../components/ContactUsButton"
 
 export default async function Contact() {
 
-    async function sendEmail(data: FormData) {
+    async function sendEmail(e: any) {
         "use server";
-        const name = data.get("name")
-        const email = data.get("email")
-        const message = data.get("message")?.toString() || ""
+        const formData = new FormData(e.target);
+
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
 
         try {
             await transporter.sendMail({
                 ...mailOptions,
                 subject: `RENT-IT msg from -> ${name}`,
                 html: `<h1>Contact Page Message</h1><h2>from: ${name}</h2><h2>email: ${email}</h2><p>${message}</p>`,
+            }).then(() => {
+                console.log("email send!")
+
             })
         } catch (e) {
             console.log(e)
 
         }
-
     }
 
 
@@ -63,7 +67,7 @@ export default async function Contact() {
                             placeholder="Enter your message"
                         ></textarea>
                     </div>
-                    <ContactUsButton label="Send Message!"/>
+                    <SubmitFormButton label="Send Message!" />
                 </form>
             </div>
         </div>
