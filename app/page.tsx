@@ -32,7 +32,13 @@ export default async function Home() {
 
     return (
         <div>
-            <h1>Welcome to RentIT!</h1>
+            <div className="flex flex-col items-center justify-center h-screen">
+                <h1 className="text-4xl font-bold mb-8">Renting App</h1>
+                <p className="text-xl text-gray-700 mb-8">Find and rent items from people near you.</p>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                    Get Started
+                </button>
+            </div>
             {user && <h2>logged in!!!!</h2>}
         </div>
     )

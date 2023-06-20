@@ -1,35 +1,22 @@
 "use client"
 import { useDropzone } from "react-dropzone";
 import type { FileWithPath } from "react-dropzone";
-import { useUploadThing } from "@/utils/uploadthing";
 import { MouseEvent, useCallback, useState } from "react";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 import { formatSize } from "@/utils/utils"
 
-
-
-
-export function ImageUploader() {
+export function ImageUploader({ shouldUpload, handleUpload }: { shouldUpload: boolean, handleUpload: Function }) {
     const [files, setFiles] = useState<File[]>([]);
     const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
         setFiles(acceptedFiles);
     }, []);
 
     const fileTypes = ["image"]
-    const { getRootProps, getInputProps } = useDropzone({
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
     });
 
-    const { startUpload, isUploading } = useUploadThing({
-        endpoint: "imageUploader", // replace this with an actual endpoint name
-        onClientUploadComplete: () => {
-            alert("uploaded successfully!");
-        },
-        onUploadError: () => {
-            alert("error occurred while uploading");
-        },
-    });
 
     const handleRemoveFile = (e: MouseEvent, index: number) => {
         e.stopPropagation()
@@ -37,6 +24,11 @@ export function ImageUploader() {
         updatedFiles.splice(index, 1);
         setFiles(updatedFiles);
     };
+
+    if (shouldUpload) {
+        console.log("inside image uploader, starting to upload")
+        handleUpload(files)
+    }
 
 
     return (
@@ -66,14 +58,6 @@ export function ImageUploader() {
                         </ul>
                     </div>
                 )}
-            </div>
-            <div>
-                {files.length > 0 && (
-                    <button onClick={() => startUpload(files)} className="border border-black">
-                        Upload {files.length} files
-                    </button>
-                )}
-                {isUploading && <h2>uploading...</h2>}
             </div>
         </div>
     );
