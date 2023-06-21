@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs"
 import prisma from "@/db/db"
+
 export default async function Home() {
     const user = await currentUser()
 

@@ -7,7 +7,7 @@ export default async function Navbar() {
 
     return (
         <nav className="flex items-center justify-between bg-gray-900 text-white py-4 px-6 shadow">
-            <div className="text-xl font-bold">Your Logo</div>
+            <div className="text-xl font-bold"><Link href="/">Your Logo</Link></div>
 
             <ul className="flex space-x-4 items-center">
                 <li><Link href="/about" className="hover:text-gray-300 text-lg">About</Link></li>
@@ -18,8 +18,8 @@ export default async function Navbar() {
                 {!user ? <li><Link href="/sign-in/" className="hover:text-gray-300 text-lg">Log-In</Link></li> :
                     (
                         <>
-                            <li><Link href="/ask" className="hover:text-gray-300 text-lg">Ask</Link></li> 
-                            <li><Link href="/offer" className="hover:text-gray-300 text-lg">Offer</Link></li> 
+                            <li><Link href="/ask" className="hover:text-gray-300 text-lg">Ask</Link></li>
+                            <li><Link href="/offer" className="hover:text-gray-300 text-lg">Offer</Link></li>
                             <UserButton afterSignOutUrl='/' />
                         </>
                     )

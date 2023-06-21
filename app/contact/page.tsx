@@ -1,5 +1,5 @@
-import { mailOptions, transporter } from "../api/nodemailer";
-import SubmitFormButton from "../components/ContactUsButton"
+import { mailOptions, transporter } from "@/utils/nodemailer";
+import SubmitFormButton from "@/components/ContactUsButton"
 
 export default async function Contact() {
 

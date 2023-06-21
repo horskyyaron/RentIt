@@ -5,8 +5,7 @@ import { MouseEvent, useCallback, useState } from "react";
 import { generateClientDropzoneAccept } from "uploadthing/client";
 import { formatSize } from "@/utils/utils"
 
-export function ImageUploader({ shouldUpload, handleUpload }: { shouldUpload: boolean, handleUpload: Function }) {
-    const [files, setFiles] = useState<File[]>([]);
+export function ImageUploader({ files, setFiles }: { files: File[], setFiles: Function }) {
     const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
         setFiles(acceptedFiles);
     }, []);
@@ -17,19 +16,12 @@ export function ImageUploader({ shouldUpload, handleUpload }: { shouldUpload: bo
         accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
     });
 
-
     const handleRemoveFile = (e: MouseEvent, index: number) => {
         e.stopPropagation()
         const updatedFiles = [...files];
         updatedFiles.splice(index, 1);
         setFiles(updatedFiles);
     };
-
-    if (shouldUpload) {
-        console.log("inside image uploader, starting to upload")
-        handleUpload(files)
-    }
-
 
     return (
         <div>
@@ -49,6 +41,7 @@ export function ImageUploader({ shouldUpload, handleUpload }: { shouldUpload: bo
                                     <span>{file.name} - {formatSize(file.size)}</span>
                                     <button
                                         className="ml-2 text-red-500"
+                                        type="button"
                                         onClick={(e) => handleRemoveFile(e, index)}
                                     >
                                         Remove

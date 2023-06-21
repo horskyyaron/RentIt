@@ -13,31 +13,40 @@ datasource db {
 model User {
     clerkId          String             @id @unique
     items            Item[]
+    RentingQueryCard RentingQueryCard[]
     createdAt        DateTime           @default(now())
     updatedAt        DateTime           @updatedAt
-    RentingQueryCard RentingQueryCard[]
 }
 
 model Item {
-    id               Int                @id @default(autoincrement())
-    name             String
-    description      String
-    rentPerDay       Float
-    ownerId          String // Changed to use `String` as the type
-    owner            User               @relation(fields: [ownerId], references: [clerkId])
-    images           String[]
-    createdAt        DateTime           @default(now())
-    updatedAt        DateTime           @updatedAt
-    RentingQueryCard RentingQueryCard[]
+    id                 Int              @id @default(autoincrement())
+    name               String
+    description        String
+    rentPerDay         Float
+    ownerId            String
+    owner              User             @relation(fields: [ownerId], references: [clerkId])
+    images             Image[]
+    RentingQueryCard   RentingQueryCard @relation(fields: [rentingQueryCardId], references: [id])
+    rentingQueryCardId Int              @unique
+    createdAt          DateTime         @default(now())
+    updatedAt          DateTime         @updatedAt
+}
+
+model Image {
+    fileKey   String   @id @unique
+    fileUrl   String
+    Item      Item     @relation(fields: [itemId], references: [id])
+    itemId    Int
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model RentingQueryCard {
     id         Int      @id @default(autoincrement())
-    query      String
-    itemId     Int
-    item       Item     @relation(fields: [itemId], references: [id])
-    proposerId String // Changed to use `String` as the type
+    proposerId String
     proposer   User     @relation(fields: [proposerId], references: [clerkId])
+    applyerId  String?
+    item       Item?
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 }
