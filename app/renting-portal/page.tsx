@@ -1,4 +1,4 @@
-import Gallery from "@/components/Gallery"
+import Gallery from "./Gallery";
 
 export default function RentingPortal() {
     return (

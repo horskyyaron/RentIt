@@ -36,7 +36,6 @@ export function ImageUploader({ files, setFiles }: { files: File[], setFiles: Fu
                         <h4>Selected Images:</h4>
                         <ul>
                             {files.map((file, index) => (
-
                                 <li key={index}>
                                     <span>{file.name} - {formatSize(file.size)}</span>
                                     <button
