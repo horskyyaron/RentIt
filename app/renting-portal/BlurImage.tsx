@@ -11,7 +11,7 @@ export default function BlurImage({ img_url }: { img_url: string }) {
 
   return (
     <Link href="#" className="group">
-      <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+      <div className="border-gray-600 border-2 w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
         <Image
           alt=""
           src={img_url}

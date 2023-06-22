@@ -1,5 +1,8 @@
 import BlurImage from "@/app/renting-portal/BlurImage";
+import { clerkClient } from "@clerk/nextjs";
+import { QueryType } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 
 type Image = {
   fileKey: string;
@@ -12,22 +15,54 @@ interface CardProps {
   price: number;
   owner_id: string;
   images: Image | any;
+  query_type: QueryType;
 }
 
-export default function RentCard({
+export default async function RentCard({
   name,
   description,
   price,
   owner_id,
   images,
+  query_type,
 }: CardProps) {
+  const user = await clerkClient.users.getUser(owner_id);
+
   return (
-    <div className="flex-col">
-      <h1>{name}</h1>
-      <p>{owner_id}</p>
-      <BlurImage img_url={images[0].fileUrl} />
-      <h2>{price}/per day</h2>
-      <p>{description}</p>
+    <div
+      className={`${
+        query_type === QueryType.ASK ? "bg-purple-800" : "bg-blue-800"
+      } w-full max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
+    >
+      <div className="flex items-center justify-center mt-2 mb-2">
+        <h1 className="text-center text-white">{name}</h1>
+      </div>
+      <div className="px-5 text-white">
+        <BlurImage img_url={images[0].fileUrl} />
+        <div className="my-2">
+          <div className="text-white text-sm">
+            <p>{description}</p>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-bold dark:text-white">
+              {price} 🪙/per day
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-gray-200 dark:border-gray-700" />
+      <Link href={`/user/${owner_id}`}>
+        <div className="my-2 flex space-x-1 items-center justify-center">
+          <Image
+            src={user.imageUrl}
+            alt=""
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <p>{user.username ? user.username : user.firstName}</p>
+        </div>
+      </Link>
     </div>
   );
 }

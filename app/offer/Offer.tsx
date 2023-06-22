@@ -43,7 +43,7 @@ export default async function OfferForm() {
       //upload to uploadthing server
       const res = await startUpload(files).then(async (ut_data) => {
         //update db.
-        const res = await fetch("/api/ask", {
+        const res = await fetch("/api/offer", {
           body: JSON.stringify({
             item_name: item_name.value,
             description: description.value,
@@ -84,19 +84,19 @@ export default async function OfferForm() {
   if (sent) {
     return (
       <div className="text-white flex flex-col items-center justify-center mt-24">
-        <h1 className="text-4xl font-bold mb-8">Request sent!</h1>
+        <h1 className="text-4xl font-bold mb-8">Item published!</h1>
         <div className="flex space-x-4">
           <div className="rounded-full border-4 border-dashed p-4">
             <Link
-              href={"/ask"}
+              href={"/offer"}
               onClick={handleAnother}
               className="shadow-white border-white border-dashed"
             >
-              Ask for another item
+              send another
             </Link>
           </div>
           <div className="rounded-full border-4 border-dashed p-4">
-            <Link href={"/renting-portal"}>Go to portal</Link>
+            <Link href={"/renting-portal"}>go to portal</Link>
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default async function OfferForm() {
     return (
       <div className="flex flex-col items-center text-black justify-center mt-5">
         <h1 className="text-4xl font-bold mb-8 text-white">
-          Request an item from the community!
+          Offer Item For Renting
         </h1>
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-xl w-4/5 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
           <form onSubmit={handleSubmit}>
@@ -143,7 +143,7 @@ export default async function OfferForm() {
                 htmlFor="rentPerDay"
                 className="block text-gray-700 font-bold mb-2"
               >
-                How much are you willing to pay each day?
+                Coins per Day
               </label>
               <div className="flex">
                 <input
@@ -166,15 +166,15 @@ export default async function OfferForm() {
                 htmlFor="rentPerDay"
                 className="block text-gray-700 font-bold mb-2"
               >
-                How does the item looks like? attach images for reference
+                Pictures
               </label>
               <ImageUploader files={files} setFiles={setFiles} />
             </div>
             <div className="text-gray-500 text-sm mt-6 mb-6">
               <h2>Tips:</h2>
               <p>
-                Add more than one picutre, it will be clearer for other users what
-                is the item that you&apos;re looking for.
+                Add more than one picutre, it will add credibility and
+                confidence for you and your item
               </p>
               <p>Choose categories, as people often search by category.</p>
             </div>

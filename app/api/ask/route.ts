@@ -26,8 +26,8 @@ export async function POST(req: Request) {
     if (!user) throw new Error("user not connected");
     const card = await prisma.rentingQueryCard.create({
       data: {
+        type: QueryType.ASK,
         proposerId: user.id,
-        type: QueryType.OFFER,
         item: {
           create: {
             name: item_name,

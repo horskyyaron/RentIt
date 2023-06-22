@@ -4,8 +4,11 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        hostname: 'uploadthing.com',
+        hostname: "uploadthing.com",
+      },
+      {
+        hostname: "img.clerk.com",
       },
     ],
   },
-}
+};

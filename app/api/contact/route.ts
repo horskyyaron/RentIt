@@ -8,7 +8,7 @@ type ContatPageData = {
 };
 
 export async function POST(req: Request) {
-  const { name, email, msg } = await req.json() as ContatPageData;
+  const { name, email, msg } = (await req.json()) as ContatPageData;
   try {
     const res = await transporter
       .sendMail({

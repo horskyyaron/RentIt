@@ -42,11 +42,17 @@ model Image {
 }
 
 model RentingQueryCard {
-    id         Int      @id @default(autoincrement())
+    id         Int       @id @default(autoincrement())
     proposerId String
-    proposer   User     @relation(fields: [proposerId], references: [clerkId])
+    proposer   User      @relation(fields: [proposerId], references: [clerkId])
     applyerId  String?
     item       Item?
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+    type       QueryType
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+}
+
+enum QueryType {
+    ASK
+    OFFER
 }
