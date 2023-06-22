@@ -1,4 +1,4 @@
-import prisma from "@/utils/db";
+import prisma from "@/lib/db";
 import RentCard from "./RentCard";
 
 export const revalidate = 60; // revalidate this page every 60 seconds

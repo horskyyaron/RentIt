@@ -1,9 +1,13 @@
 "use client";
 import { ImageUploader } from "@/components/ImageUploader";
-import { useState, useTransition } from "react";
-import { useUploadThing } from "@/utils/uploadthing";
+import { useState } from "react";
+import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { SendIcon, Terminal } from "lucide-react";
+import { TypographyP } from "@/components/ui/Typography";
+import { Button } from "@/components/ui/button";
 
 export default async function OfferForm() {
   const router = useRouter();
@@ -84,20 +88,28 @@ export default async function OfferForm() {
   if (sent) {
     return (
       <div className="text-white flex flex-col items-center justify-center mt-24">
-        <h1 className="text-4xl font-bold mb-8">Request sent!</h1>
-        <div className="flex space-x-4">
-          <div className="rounded-full border-4 border-dashed p-4">
-            <Link
-              href={"/ask"}
-              onClick={handleAnother}
-              className="shadow-white border-white border-dashed"
-            >
-              Ask for another item
-            </Link>
+        <div className="flex justify-center items-center mt-10">
+          <div>
+            <Alert>
+              <Terminal />
+              <AlertTitle className="flex">
+                <TypographyP label="Published!" />
+                <SendIcon className="ml-2" />
+              </AlertTitle>
+              <AlertDescription>Your Request has been sent to the community!</AlertDescription>
+            </Alert>
           </div>
-          <div className="rounded-full border-4 border-dashed p-4">
-            <Link href={"/renting-portal"}>Go to portal</Link>
-          </div>
+        </div>
+        <div className="flex space-x-4 mt-4">
+          <Button onClick={handleAnother} variant="secondary">Ask for another item</Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              router.push("/renting-portal");
+            }}
+          >
+            Go to portal
+          </Button>
         </div>
       </div>
     );
@@ -173,8 +185,8 @@ export default async function OfferForm() {
             <div className="text-gray-500 text-sm mt-6 mb-6">
               <h2>Tips:</h2>
               <p>
-                Add more than one picutre, it will be clearer for other users what
-                is the item that you&apos;re looking for.
+                Add more than one picutre, it will be clearer for other users
+                what is the item that you&apos;re looking for.
               </p>
               <p>Choose categories, as people often search by category.</p>
             </div>

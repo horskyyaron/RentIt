@@ -1,9 +1,13 @@
 "use client";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ImageUploader } from "@/components/ImageUploader";
 import { useState, useTransition } from "react";
-import { useUploadThing } from "@/utils/uploadthing";
+import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { SendIcon, Terminal } from "lucide-react";
+import { TypographyP } from "@/components/ui/Typography";
+import { Button } from "@/components/ui/button";
 
 export default async function OfferForm() {
   const router = useRouter();
@@ -84,20 +88,28 @@ export default async function OfferForm() {
   if (sent) {
     return (
       <div className="text-white flex flex-col items-center justify-center mt-24">
-        <h1 className="text-4xl font-bold mb-8">Item published!</h1>
-        <div className="flex space-x-4">
-          <div className="rounded-full border-4 border-dashed p-4">
-            <Link
-              href={"/offer"}
-              onClick={handleAnother}
-              className="shadow-white border-white border-dashed"
-            >
-              send another
-            </Link>
+        <div className="flex justify-center items-center mt-10">
+          <div>
+            <Alert>
+              <Terminal />
+              <AlertTitle className="flex">
+                <TypographyP label="Published!" />
+                <SendIcon className="ml-2" />
+              </AlertTitle>
+              <AlertDescription>Your item has been published!</AlertDescription>
+            </Alert>
           </div>
-          <div className="rounded-full border-4 border-dashed p-4">
-            <Link href={"/renting-portal"}>go to portal</Link>
-          </div>
+        </div>
+        <div className="flex space-x-4 mt-4">
+          <Button onClick={handleAnother} variant="secondary">send another</Button>
+          <Button
+          variant="secondary"
+            onClick={() => {
+              router.push("/renting-portal");
+            }}
+          >
+            Go to portal
+          </Button>
         </div>
       </div>
     );

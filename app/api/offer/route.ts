@@ -1,4 +1,4 @@
-import prisma from "@/utils/db";
+import prisma from "@/lib/db";
 import { currentUser } from "@clerk/nextjs";
 import { QueryType } from "@prisma/client";
 import { NextResponse } from "next/server";

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { transporter, mailOptions } from "@/utils/nodemailer";
+import { transporter, mailOptions } from "@/lib/nodemailer";
 
 type ContatPageData = {
   name: string;

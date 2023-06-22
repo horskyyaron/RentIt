@@ -1,4 +1,5 @@
 import BlurImage from "@/app/renting-portal/BlurImage";
+import { Badge } from "@/components/ui/badge";
 import { clerkClient } from "@clerk/nextjs";
 import { QueryType } from "@prisma/client";
 import Image from "next/image";
@@ -38,7 +39,9 @@ export default async function RentCard({
         <h1 className="text-center text-white">{name}</h1>
       </div>
       <div className="px-5 text-white">
-        <BlurImage img_url={images[0].fileUrl} />
+        <div className="aspect-square relative">
+          <BlurImage img_url={images[0].fileUrl} />
+        </div>
         <div className="my-2">
           <div className="text-white text-sm">
             <p>{description}</p>
@@ -49,6 +52,11 @@ export default async function RentCard({
             </span>
           </div>
         </div>
+      </div>
+      <div className="border-t border-gray-200 dark:border-gray-700" />
+      <div className="flex flex-wrap space-x-1 space-y-1 my-2 mx-2">
+        <Badge variant="default">hello</Badge>
+        <Badge variant="default">Badge</Badge>
       </div>
       <div className="border-t border-gray-200 dark:border-gray-700" />
       <Link href={`/user/${owner_id}`}>
