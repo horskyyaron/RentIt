@@ -33,6 +33,7 @@ export default async function Gallery() {
                 price={card.item?.rentPerDay || 1}
                 images={card.item?.images}
                 query_type={card.type}
+                published={card.createdAt}
               />
             </div>
           ))}

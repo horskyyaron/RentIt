@@ -4,6 +4,10 @@ import { clerkClient } from "@clerk/nextjs";
 import { QueryType } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+dayjs.extend(relativeTime);
 
 type Image = {
   fileKey: string;
@@ -17,6 +21,7 @@ interface CardProps {
   owner_id: string;
   images: Image | any;
   query_type: QueryType;
+  published: Date;
 }
 
 export default async function RentCard({
@@ -26,6 +31,7 @@ export default async function RentCard({
   owner_id,
   images,
   query_type,
+  published,
 }: CardProps) {
   const user = await clerkClient.users.getUser(owner_id);
 
@@ -61,14 +67,16 @@ export default async function RentCard({
       <div className="border-t border-gray-200 dark:border-gray-700" />
       <Link href={`/user/${owner_id}`}>
         <div className="my-2 flex space-x-1 items-center justify-center">
-          <Image
-            src={user.imageUrl}
-            alt=""
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
+          <Avatar>
+            <AvatarImage src={user.imageUrl} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
           <p>{user.username ? user.username : user.firstName}</p>
+        </div>
+        <div>
+          <p className="text-center">
+            created at: {dayjs(published).fromNow()}
+          </p>
         </div>
       </Link>
     </div>

@@ -4,10 +4,11 @@ import { ImageUploader } from "@/components/ImageUploader";
 import { useState, useTransition } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { SendIcon, Terminal } from "lucide-react";
 import { TypographyP } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/button";
+import { DatePickerWithRange } from "./DatePicker";
+
 
 export default async function OfferForm() {
   const router = useRouter();
@@ -101,9 +102,11 @@ export default async function OfferForm() {
           </div>
         </div>
         <div className="flex space-x-4 mt-4">
-          <Button onClick={handleAnother} variant="secondary">send another</Button>
+          <Button onClick={handleAnother} variant="secondary">
+            send another
+          </Button>
           <Button
-          variant="secondary"
+            variant="secondary"
             onClick={() => {
               router.push("/renting-portal");
             }}
@@ -182,6 +185,7 @@ export default async function OfferForm() {
               </label>
               <ImageUploader files={files} setFiles={setFiles} />
             </div>
+            <DatePickerWithRange />
             <div className="text-gray-500 text-sm mt-6 mb-6">
               <h2>Tips:</h2>
               <p>
