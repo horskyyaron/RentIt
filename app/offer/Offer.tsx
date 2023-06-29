@@ -7,16 +7,15 @@ import { useRouter } from "next/navigation";
 import { SendIcon, Terminal } from "lucide-react";
 import { TypographyP } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/button";
-import { DatePickerWithRange } from "./DatePicker";
-
+import dayjs from "dayjs";
 
 export default async function OfferForm() {
   const router = useRouter();
-
   const [sent, setSent] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
-
   const [files, setFiles] = useState<File[]>([]);
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [isFetching, setIsFetching] = useState(false);
 
   const { startUpload } = useUploadThing({
     endpoint: "imageUploader", // replace this with an actual endpoint name
@@ -31,6 +30,7 @@ export default async function OfferForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (files.length == 0) {
       alert("add at least one image to send!");
       return;
@@ -43,42 +43,43 @@ export default async function OfferForm() {
       "description"
     ) as HTMLInputElement;
     const rent = form.elements.namedItem("rent") as HTMLInputElement;
+    const endDate = form.elements.namedItem("endDate") as HTMLInputElement;
 
-    try {
-      //upload to uploadthing server
-      const res = await startUpload(files).then(async (ut_data) => {
-        //update db.
-        const res = await fetch("/api/offer", {
-          body: JSON.stringify({
-            item_name: item_name.value,
-            description: description.value,
-            rent: rent.value,
-            uploadingthing_data: ut_data,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-        });
+    //try {
+    //  //upload to uploadthing server
+    //  const res = await startUpload(files).then(async (ut_data) => {
+    //    //update db.
+    //    const res = await fetch("/api/offer", {
+    //      body: JSON.stringify({
+    //        item_name: item_name.value,
+    //        description: description.value,
+    //        rent: rent.value,
+    //        uploadingthing_data: ut_data,
+    //      }),
+    //      headers: {
+    //        "Content-Type": "application/json",
+    //      },
+    //      method: "POST",
+    //    });
 
-        const { msg, error } = await res.json();
-        if (error) {
-          console.log("there was an error");
-        } else {
-          console.log("db updated!!!!");
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    //    const { msg, error } = await res.json();
+    //    if (error) {
+    //      console.log("there was an error");
+    //    } else {
+    //      console.log("db updated!!!!");
+    //    }
+    //  });
+    //} catch (error) {
+    //  console.log(error);
+    //}
 
-    //reset the form and states fields
-    setIsFetching(false);
-    item_name.value = "";
-    description.value = "";
-    rent.value = "1";
-    setFiles([]);
-    setSent(true);
+    ////reset the form and states fields
+    //setIsFetching(false);
+    //item_name.value = "";
+    //description.value = "";
+    //rent.value = "1";
+    //setFiles([]);
+    //setSent(true);
   }
 
   function handleAnother() {
@@ -185,7 +186,44 @@ export default async function OfferForm() {
               </label>
               <ImageUploader files={files} setFiles={setFiles} />
             </div>
-            <DatePickerWithRange />
+            <label
+              htmlFor="rentPerDay"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Renting period start day
+            </label>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              onChange={(e) => {
+                setStartDate(new Date(e.currentTarget.value));
+              }}
+              className="border border-gray-300  rounded-lg p-2 w-full focus:outline-none focus:border-blue-500"
+              placeholder="Enter item name"
+            />
+            <label
+              htmlFor="rentPerDay"
+              className="block text-gray-700 font-bold mb-2"
+            >
+              Renting period end day
+            </label>
+            <input
+              type="date"
+              id="endDate"
+              name="endDate"
+              onChange={(e) => {
+                const date = dayjs(e.currentTarget.value);
+                if (date.isBefore(dayjs(startDate))) {
+                  alert("end date must be after the starting date!");
+                  e.currentTarget.value = dayjs(startDate)
+                    .format("YYYY/MM/DD")
+                    .replaceAll("/", "-");
+                }
+              }}
+              className="border border-gray-300  rounded-lg p-2 w-full focus:outline-none focus:border-blue-500"
+              placeholder="Enter item name"
+            />
             <div className="text-gray-500 text-sm mt-6 mb-6">
               <h2>Tips:</h2>
               <p>
