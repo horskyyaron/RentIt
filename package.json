@@ -10,7 +10,7 @@
         "build": "next build",
         "start": "next start",
         "postinstall": "prisma generate",
-        "clean": "ts-node --compiler-options \"{\\\"module\\\": \\\"commonjs\\\"}\" utils/clean.ts"
+        "clean": "ts-node --compiler-options \"{\\\"module\\\": \\\"commonjs\\\"}\" lib/clean.ts"
     },
     "dependencies": {
         "@clerk/nextjs": "^4.21.1",

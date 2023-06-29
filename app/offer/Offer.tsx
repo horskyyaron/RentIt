@@ -23,7 +23,8 @@ export default async function OfferForm() {
       // alert("uploaded successfully!");
       console.log("cool");
     },
-    onUploadError: () => {
+    onUploadError: (e) => {
+      console.log(e);
       alert("error occurred while uploading, please try and publish again");
     },
   });
@@ -45,41 +46,43 @@ export default async function OfferForm() {
     const rent = form.elements.namedItem("rent") as HTMLInputElement;
     const endDate = form.elements.namedItem("endDate") as HTMLInputElement;
 
-    //try {
-    //  //upload to uploadthing server
-    //  const res = await startUpload(files).then(async (ut_data) => {
-    //    //update db.
-    //    const res = await fetch("/api/offer", {
-    //      body: JSON.stringify({
-    //        item_name: item_name.value,
-    //        description: description.value,
-    //        rent: rent.value,
-    //        uploadingthing_data: ut_data,
-    //      }),
-    //      headers: {
-    //        "Content-Type": "application/json",
-    //      },
-    //      method: "POST",
-    //    });
+    try {
+      //upload to uploadthing server
+      const res = await startUpload(files).then(async (ut_data) => {
+        //update db.
+        const res = await fetch("/api/offer", {
+          body: JSON.stringify({
+            item_name: item_name.value,
+            description: description.value,
+            rent: rent.value,
+            startDate: dayjs(startDate).format("DD/MM/YYYY"),
+            endDate: dayjs(endDate.value).format("DD/MM/YYYY"),
+            uploadingthing_data: ut_data,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        });
 
-    //    const { msg, error } = await res.json();
-    //    if (error) {
-    //      console.log("there was an error");
-    //    } else {
-    //      console.log("db updated!!!!");
-    //    }
-    //  });
-    //} catch (error) {
-    //  console.log(error);
-    //}
+        const { msg, error } = await res.json();
+        if (error) {
+          console.log("there was an error");
+        } else {
+          console.log("db updated!!!!");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
-    ////reset the form and states fields
-    //setIsFetching(false);
-    //item_name.value = "";
-    //description.value = "";
-    //rent.value = "1";
-    //setFiles([]);
-    //setSent(true);
+    //reset the form and states fields
+    setIsFetching(false);
+    item_name.value = "";
+    description.value = "";
+    rent.value = "1";
+    setFiles([]);
+    setSent(true);
   }
 
   function handleAnother() {

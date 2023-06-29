@@ -8,6 +8,8 @@ type CardData = {
   item_name: string;
   description: string;
   rent: number;
+  startDate: string;
+  endDate: string;
   uploadingthing_data: [
     {
       fileKey: string;
@@ -18,9 +20,11 @@ type CardData = {
 
 export async function POST(req: Request) {
   //get data from body
-  const { item_name, description, rent, uploadingthing_data } =
+  const { item_name, description, rent, uploadingthing_data, endDate, startDate } =
     (await req.json()) as CardData;
 
+  console.log(endDate, startDate)
+  
   try {
     const user = await currentUser();
     if (!user) throw new Error("user not connected");

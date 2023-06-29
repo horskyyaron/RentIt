@@ -43,6 +43,8 @@ export default async function OfferForm() {
     ) as HTMLInputElement;
     const rent = form.elements.namedItem("rent") as HTMLInputElement;
 
+    console.log(files);
+
     try {
       //upload to uploadthing server
       const res = await startUpload(files).then(async (ut_data) => {
@@ -63,6 +65,7 @@ export default async function OfferForm() {
         const { msg, error } = await res.json();
         if (error) {
           console.log("there was an error");
+          console.log(error);
         } else {
           console.log("db updated!!!!");
         }
@@ -96,12 +99,16 @@ export default async function OfferForm() {
                 <TypographyP label="Published!" />
                 <SendIcon className="ml-2" />
               </AlertTitle>
-              <AlertDescription>Your Request has been sent to the community!</AlertDescription>
+              <AlertDescription>
+                Your Request has been sent to the community!
+              </AlertDescription>
             </Alert>
           </div>
         </div>
         <div className="flex space-x-4 mt-4">
-          <Button onClick={handleAnother} variant="secondary">Ask for another item</Button>
+          <Button onClick={handleAnother} variant="secondary">
+            Ask for another item
+          </Button>
           <Button
             variant="secondary"
             onClick={() => {
