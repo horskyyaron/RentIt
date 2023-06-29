@@ -17,3 +17,4 @@ export function formatSize(sizeInBytes: number) {
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
