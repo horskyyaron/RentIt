@@ -4,6 +4,6 @@ export const metadata = {
   title: "Offer",
 };
 
-export default async function Offer() {
+export default function Offer() {
   return <OfferForm />;
 }

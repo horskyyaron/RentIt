@@ -4,22 +4,20 @@ import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
 
-export default async function OfferForm() {
+export default async function Ask() {
   const router = useRouter();
-
   const [sent, setSent] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
-  const [files, setFiles] = useState<File[]>([]);
 
-  const [date, setDate] = useState<Date>();
-  console.log(date);
+  const [files, setFiles] = useState<File[]>([]);
 
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
       // alert("uploaded successfully!");
       console.log("cool");
     },
-    onUploadError: () => {
+    onUploadError: (e) => {
+      console.log("uploadthing error:", e);
       alert("error occurred while uploading, please try and publish again");
     },
   });
@@ -43,7 +41,7 @@ export default async function OfferForm() {
       //upload to uploadthing server
       const res = await startUpload(files).then(async (ut_data) => {
         //update db.
-        const res = await fetch("/api/offer", {
+        const res = await fetch("/api/ask", {
           body: JSON.stringify({
             item_name: item_name.value,
             description: description.value,
@@ -59,6 +57,7 @@ export default async function OfferForm() {
         const { msg, error } = await res.json();
         if (error) {
           console.log("there was an error");
+          console.log(error);
         } else {
           console.log("db updated!!!!");
         }
@@ -86,11 +85,11 @@ export default async function OfferForm() {
       <div className="mt-24 flex flex-col items-center justify-center text-white">
         <div className="mt-10 flex items-center justify-center">
           <div>
-            <h1>item published!</h1>
+            <h1>sent to community!</h1>
           </div>
         </div>
         <div className="mt-4 flex space-x-4">
-          <button onClick={handleAnother}>send another</button>
+          <button onClick={handleAnother}>Ask for another item</button>
           <button
             onClick={() => {
               router.push("/renting-portal");
@@ -138,7 +137,7 @@ export default async function OfferForm() {
             htmlFor="rentPerDay"
             className="mb-2 block font-bold text-gray-700"
           >
-            Coins per Day
+            How much are you willing to pay each day?
           </label>
           <div className="flex">
             <input
@@ -159,16 +158,15 @@ export default async function OfferForm() {
             htmlFor="rentPerDay"
             className="mb-2 block font-bold text-gray-700"
           >
-            Pictures
+            How does the item looks like? attach images for reference
           </label>
           <ImageUploader files={files} setFiles={setFiles} />
         </div>
-        {/* <DatePicker date={date} setDate={setDate} /> */}
         <div className="mb-6 mt-6 text-sm text-gray-500">
           <h2>Tips:</h2>
           <p>
-            Add more than one picutre, it will add credibility and confidence
-            for you and your item
+            Add more than one picutre, it will be clearer for other users what
+            is the item that you&apos;re looking for.
           </p>
           <p>Choose categories, as people often search by category.</p>
         </div>
