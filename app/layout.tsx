@@ -22,10 +22,10 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <div className="flex flex-col min-h-screen">
-            <header className="bg-gray-900 text-white py-4 px-6">
+            <header className="bg-gray-900 py-2 px-6">
               <Navbar />
             </header>
-            <main className="flex-grow bg-gradient-to-r from-gray-800 to-indigo-800 text-white font-sans">
+            <main className="flex-grow bg-gradient-to-r from-gray-800 to-indigo-800 font-sans">
               {children}
             </main>
             <footer className="bg-gray-900 text-white py-4 px-6">

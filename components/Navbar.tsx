@@ -1,14 +1,26 @@
 import { SignOutButton, clerkClient, currentUser } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
+import logo from "@/app/favicon_io/android-chrome-192x192.png";
 
 export default async function Navbar() {
   const user = await currentUser();
 
   return (
-    <nav className="flex items-center justify-between bg-gray-900 text-white py-4 px-6 shadow">
+    <nav className="flex items-center justify-between bg-gray-900 text-white px-6 shadow">
       <div className="text-xl font-bold">
-        <Link href="/">Your Logo</Link>
+        <Link href="/">
+          <Image
+            src={logo}
+            key={"logo"}
+            id="logo"
+            alt=""
+            className="rounded-full"
+            width={40}
+            height={40}
+          />
+        </Link>
       </div>
 
       <ul className="flex space-x-4 items-center">
