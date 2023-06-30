@@ -1,12 +1,10 @@
 import BlurImage from "@/app/renting-portal/BlurImage";
-import { Badge } from "@/components/ui/badge";
 import { clerkClient } from "@clerk/nextjs";
 import { QueryType } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 dayjs.extend(relativeTime);
 
 type Image = {
@@ -39,17 +37,17 @@ export default async function RentCard({
     <div
       className={`${
         query_type === QueryType.ASK ? "bg-purple-800" : "bg-blue-800"
-      } w-full max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
+      } w-full max-w-sm rounded-lg border border-gray-200 shadow dark:border-gray-700 dark:bg-gray-800`}
     >
-      <div className="flex items-center justify-center mt-2 mb-2">
+      <div className="mb-2 mt-2 flex items-center justify-center">
         <h1 className="text-center text-white">{name}</h1>
       </div>
       <div className="px-5 text-white">
-        <div className="aspect-square relative">
+        <div className="relative aspect-square">
           <BlurImage img_url={images[0].fileUrl} />
         </div>
         <div className="my-2">
-          <div className="text-white text-sm">
+          <div className="text-sm text-white">
             <p>{description}</p>
           </div>
           <div className="flex items-center justify-between">
@@ -60,17 +58,14 @@ export default async function RentCard({
         </div>
       </div>
       <div className="border-t border-gray-200 dark:border-gray-700" />
-      <div className="flex flex-wrap space-x-1 space-y-1 my-2 mx-2">
-        <Badge variant="default">hello</Badge>
-        <Badge variant="default">Badge</Badge>
-      </div>
+      {/* <div className="flex flex-wrap space-x-1 space-y-1 my-2 mx-2"> */}
+      {/*   <Badge variant="default">hello</Badge> */}
+      {/*   <Badge variant="default">Badge</Badge> */}
+      {/* </div> */}
       <div className="border-t border-gray-200 dark:border-gray-700" />
       <Link href={`/user/${owner_id}`}>
-        <div className="my-2 flex space-x-1 items-center justify-center">
-          <Avatar>
-            <AvatarImage src={user.imageUrl} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+        <div className="my-2 flex items-center justify-center space-x-1">
+          <Image src={user.imageUrl} alt="" className="rounded-full" width={30} height={30}/>
           <p>{user.username ? user.username : user.firstName}</p>
         </div>
         <div>

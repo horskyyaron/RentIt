@@ -1,6 +1,5 @@
 import { currentUser } from "@clerk/nextjs";
 import prisma from "@/lib/db";
-import { TypographyH1 } from "@/components/ui/Typography";
 
 export default async function Home() {
   const user = await currentUser();
@@ -31,12 +30,12 @@ export default async function Home() {
 
   return (
     <div>
-      <div className="flex flex-col mt-10 items-center justify-center ">
-        <TypographyH1 label="RentIT" />
-        <p className="text-xl text-white mb-8">
+      <div className="mt-10 flex flex-col items-center justify-center ">
+        <h1>rent it</h1>
+        <p className="mb-8 text-xl text-white">
           Find and rent items from people near you.
         </p>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+        <button className="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
           Get Started
         </button>
       </div>

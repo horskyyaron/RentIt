@@ -1,15 +1,8 @@
 "use client";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ImageUploader } from "@/components/ImageUploader";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useRouter } from "next/navigation";
-import { SendIcon, Terminal } from "lucide-react";
-import { TypographyP } from "@/components/ui/Typography";
-import { Button } from "@/components/ui/button";
-import { DatePickerWithRange } from "./DatePicker";
-import { DateRange } from "react-day-picker";
-import { DatePicker } from "@/components/ui/DatePicker";
 
 export default async function OfferForm() {
   const router = useRouter();
@@ -90,46 +83,36 @@ export default async function OfferForm() {
 
   if (sent) {
     return (
-      <div className="text-white flex flex-col items-center justify-center mt-24">
-        <div className="flex justify-center items-center mt-10">
+      <div className="mt-24 flex flex-col items-center justify-center text-white">
+        <div className="mt-10 flex items-center justify-center">
           <div>
-            <Alert>
-              <Terminal />
-              <AlertTitle className="flex">
-                <TypographyP label="Published!" />
-                <SendIcon className="ml-2" />
-              </AlertTitle>
-              <AlertDescription>Your item has been published!</AlertDescription>
-            </Alert>
+            <h1>item published!</h1>
           </div>
         </div>
-        <div className="flex space-x-4 mt-4">
-          <Button onClick={handleAnother} variant="secondary">
-            send another
-          </Button>
-          <Button
-            variant="secondary"
+        <div className="mt-4 flex space-x-4">
+          <button onClick={handleAnother}>send another</button>
+          <button
             onClick={() => {
               router.push("/renting-portal");
             }}
           >
             Go to portal
-          </Button>
+          </button>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="flex flex-col items-center text-black justify-center mt-5">
-        <h1 className="text-4xl font-bold mb-8 text-white">
+      <div className="mt-5 flex flex-col items-center justify-center text-black">
+        <h1 className="mb-8 text-4xl font-bold text-white">
           Offer Item For Renting
         </h1>
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-xl w-4/5 sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
+        <div className="w-4/5 max-w-xl rounded-lg bg-white p-8 shadow-lg sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block text-gray-700 text-lg font-semibold mb-2"
+                className="mb-2 block text-lg font-semibold text-gray-700"
               >
                 Item Name
               </label>
@@ -137,28 +120,28 @@ export default async function OfferForm() {
                 type="text"
                 id="name"
                 name="name"
-                className="border border-gray-300  rounded-lg p-2 w-full focus:outline-none focus:border-blue-500"
+                className="w-full rounded-lg  border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
                 placeholder="Enter item name"
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="message"
-                className="block text-gray-700 text-lg font-semibold mb-2"
+                className="mb-2 block text-lg font-semibold text-gray-700"
               >
                 Item Description
               </label>
               <textarea
                 id="description"
                 name="description"
-                className="border border-gray-300 rounded-lg p-2 w-full h-40 resize-none focus:outline-none focus:border-blue-500"
+                className="h-40 w-full resize-none rounded-lg border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
                 placeholder="Enter item description"
               ></textarea>
             </div>
             <div className="mb-4">
               <label
                 htmlFor="rentPerDay"
-                className="block text-gray-700 font-bold mb-2"
+                className="mb-2 block font-bold text-gray-700"
               >
                 Coins per Day
               </label>
@@ -169,11 +152,11 @@ export default async function OfferForm() {
                   id="rent"
                   min={1}
                   max={5}
-                  className="w-1/2 border border-gray-300 rounded-l-md py-2 px-3 "
+                  className="w-1/2 rounded-l-md border border-gray-300 px-3 py-2 "
                   placeholder="Enter rent amount"
                   required
                 />
-                <span className="bg-gray-200 py-2 px-3 rounded-r-md ">
+                <span className="rounded-r-md bg-gray-200 px-3 py-2 ">
                   🪙/day
                 </span>
               </div>
@@ -181,14 +164,14 @@ export default async function OfferForm() {
             <div className="mb-4">
               <label
                 htmlFor="rentPerDay"
-                className="block text-gray-700 font-bold mb-2"
+                className="mb-2 block font-bold text-gray-700"
               >
                 Pictures
               </label>
               <ImageUploader files={files} setFiles={setFiles} />
             </div>
-            <DatePicker date={date} setDate={setDate} />
-            <div className="text-gray-500 text-sm mt-6 mb-6">
+            {/* <DatePicker date={date} setDate={setDate} /> */}
+            <div className="mb-6 mt-6 text-sm text-gray-500">
               <h2>Tips:</h2>
               <p>
                 Add more than one picutre, it will add credibility and
