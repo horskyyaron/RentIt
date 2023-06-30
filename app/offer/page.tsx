@@ -1,6 +1,6 @@
 "use client";
 import { useForm, Controller, useFormState } from "react-hook-form";
-import { DatePicker, InputNumber } from "antd";
+import { Button, DatePicker, InputNumber } from "antd";
 const { RangePicker } = DatePicker;
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { TextField } from "@mui/material";
@@ -16,7 +16,7 @@ type FormInput = {
   rent: number;
 };
 
-export default function OfferPage () {
+export default function OfferPage() {
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
       // alert("uploaded successfully!");
@@ -27,12 +27,11 @@ export default function OfferPage () {
     },
   });
 
-  const { control, handleSubmit } = useForm<FormInput>();
+  const { control, handleSubmit, reset } = useForm<FormInput>();
   const [files, setFiles] = useState<File[]>([]);
-  const { isSubmitting, isSubmitSuccessful } = useFormState({ control });
-
-  console.log("isSubmitting:", isSubmitting);
-  console.log("isSubmitSuccessful:", isSubmitSuccessful);
+  const { isSubmitting, isSubmitSuccessful, errors } = useFormState({
+    control,
+  });
 
   const onSubmit = async (data: FormInput) => {
     //getting the dates
@@ -40,10 +39,6 @@ export default function OfferPage () {
     let [from, to] = dates;
     from = dayjs(from).format("DD/MM/YYYY");
     to = dayjs(to).format("DD/MM/YYYY");
-
-    console.log(
-      `name: ${item_name}\n desc: ${item_description}\n rent: ${rent}\n start date: ${from}\n end date: ${to}`
-    );
 
     if (files.length == 0) {
       alert("add at least one image to send!");
@@ -80,63 +75,107 @@ export default function OfferPage () {
   };
 
   return (
-    <>
-      {isSubmitting && <h1 className="text-3xl">sending....</h1>}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col space-y-3"
-      >
-        <h1>Item Information</h1>
-        <Controller
-          render={({ field }) => (
-            <TextField {...field} variant="outlined" label="Item Name" />
-          )}
-          name="item_name"
-          control={control}
-        />
-        {/* TODO: when extracting the data, replace \n with enter or something*/}
-        <Controller
-          render={({ field }) => (
-            <TextField
-              {...field}
-              variant="outlined"
-              label="Item Description"
-              rows={2}
-              multiline
-            />
-          )}
-          name="item_description"
-          control={control}
-        />
-        <h1>Available Renting Days</h1>
-        <Controller
-          render={({ field }) => (
-            // @ts-ignore
-            <RangePicker
-              {...field}
-              separator={<KeyboardDoubleArrowRightIcon />}
-              format={"DD/MM/YYYY"}
-            />
-          )}
-          name="dates"
-          control={control}
-        />
-        <h1>Coins Per Day 🪙</h1>
-        <Controller
-          render={({ field }) => (
-            // @ts-ignore
-            <InputNumber {...field} placeholder="1" min={1} />
-          )}
-          name="rent"
-          control={control}
-        />
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-3">
+      <h1>Item Information</h1>
+      <Controller
+        render={({ field }) => (
+          <TextField {...field} variant="outlined" label="Item Name" />
+        )}
+        name="item_name"
+        control={control}
+        rules={{
+          required: { value: true, message: "required" },
+        }}
+      />
+      {errors.item_name && (
+        <p className="text-sm text-red-500">{errors.item_name.message}</p>
+      )}
+      {/* TODO: when extracting the data, replace \n with enter or something*/}
+      <Controller
+        render={({ field }) => (
+          <TextField
+            {...field}
+            variant="outlined"
+            label="Item Description"
+            rows={2}
+            multiline
+          />
+        )}
+        name="item_description"
+        control={control}
+        rules={{
+          required: { value: true, message: "required" },
+          minLength: { value: 5, message: "description too short" },
+        }}
+      />
+      {errors.item_description && (
+        <p className="text-sm text-red-500">
+          {errors.item_description.message}
+        </p>
+      )}
+      <h1>Available Renting Days</h1>
+      <Controller
+        render={({ field }) => (
+          // @ts-ignore
+          <RangePicker
+            {...field}
+            separator={<KeyboardDoubleArrowRightIcon />}
+            format={"DD/MM/YYYY"}
+          />
+        )}
+        name="dates"
+        control={control}
+        rules={{
+          required: { value: true, message: "required" },
+        }}
+      />
+      {errors.dates && (
+        <p className="text-sm text-red-500">{errors.dates.message}</p>
+      )}
+      <h1>Coins Per Day 🪙</h1>
+      <Controller
+        render={({ field }) => (
+          // @ts-ignore
+          <InputNumber {...field} placeholder="1" min={1} />
+        )}
+        name="rent"
+        control={control}
+        rules={{
+          required: { value: true, message: "required" },
+          min: { value: 1, message: "at least one coin" },
+        }}
+      />
+      {errors.rent && (
+        <p className="text-sm text-red-500">{errors.rent.message}</p>
+      )}
 
-        <h1>Images</h1>
-        <ImageUploader files={files} setFiles={setFiles} />
+      <h1>Images</h1>
+      <ImageUploader files={files} setFiles={setFiles} />
 
-        <input type="submit" />
-      </form>
-    </>
+      <div className="flex items-center justify-center">
+        {isSubmitting ? (
+          <Button type="default" loading disabled>
+            Publishing item...
+          </Button>
+        ) : (
+          <Button type="default" htmlType="submit" className="bg-slate-400 mr-3">
+            send
+          </Button>
+        )}
+        <Button
+          type="default"
+          className="bg-red-200"
+          onClick={() => {
+            reset({
+              item_name: "",
+              item_description: "",
+            });
+            setFiles([]);
+          }}
+        >
+          clear
+        </Button>
+      </div>
+    </form>
   );
-};
-
+}
