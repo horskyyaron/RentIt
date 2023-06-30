@@ -21,14 +21,14 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
-          <div className="flex flex-col min-h-screen">
-            <header className="bg-gray-900 py-2 px-6">
+          <div className="flex min-h-screen flex-col">
+            <header className="bg-gray-900 px-6 py-2">
               <Navbar />
             </header>
             <main className="flex-grow bg-gradient-to-r from-gray-800 to-indigo-800 font-sans">
-              {children}
+                {children}
             </main>
-            <footer className="bg-gray-900 text-white py-4 px-6">
+            <footer className="bg-gray-900 px-6 py-4 text-white">
               <h1>footer</h1>
             </footer>
           </div>
