@@ -17,6 +17,24 @@ type FormInput = {
 };
 
 export default function OfferPage() {
+  const { control, handleSubmit, reset } = useForm<FormInput>();
+  const [files, setFiles] = useState<File[]>([]);
+  const { isSubmitting, isSubmitSuccessful, errors } = useFormState({
+    control,
+  });
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
       // alert("uploaded successfully!");
@@ -34,24 +52,6 @@ export default function OfferPage() {
       item_description: "",
     });
     setFiles([]);
-  };
-
-  const { control, handleSubmit, reset } = useForm<FormInput>();
-  const [files, setFiles] = useState<File[]>([]);
-  const { isSubmitting, isSubmitSuccessful, errors } = useFormState({
-    control,
-  });
-  const [open, setOpen] = useState(false);
-
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
   };
 
   const onSubmit = async (data: FormInput) => {
@@ -205,7 +205,7 @@ export default function OfferPage() {
           </Button>
         </div>
       </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: "top", horizontal:"center"}}>
         <Alert severity="success" sx={{ width: "100%" }}>
           Your item was published successfully!
         </Alert>
