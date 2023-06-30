@@ -5,6 +5,7 @@ export default authMiddleware({
         "/",
         "/about",
         "/contact",
+        "/how",
         "/renting-portal",
         "/api/uploadthing",
     ],
