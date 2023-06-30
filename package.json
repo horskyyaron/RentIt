@@ -17,7 +17,7 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@fontsource/roboto": "^5.0.3",
-        "@mui/joy": "^5.0.0-alpha.85",
+        "@mui/material": "^5.13.6",
         "@prisma/client": "^4.16.1",
         "@radix-ui/react-avatar": "^1.0.3",
         "@radix-ui/react-popover": "^1.0.6",

@@ -4,6 +4,6 @@ export const metadata = {
   title: "Offer",
 };
 
-export default function Offer() {
+export default function OfferPage() {
   return <OfferForm />;
 }
