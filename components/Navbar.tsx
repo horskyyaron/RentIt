@@ -85,7 +85,7 @@ export default async function Navbar() {
           <UserButton afterSignOutUrl="/" />
         </span>
       </nav>
-      <ul className="hidden " id="menu3">
+      <ul className="hidden " id="menu_vertical">
         <li>
           <Link href="/about" className="text-lg hover:text-gray-300">
             About

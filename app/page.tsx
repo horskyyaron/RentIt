@@ -60,9 +60,9 @@ export default async function Home() {
           </svg>
           <blockquote>
             <p className="text-2xl font-medium italic text-gray-900 dark:text-white">
-              " I&apos;ve mastered the art of sharing without ever owning.
+              &quot; I&apos;ve mastered the art of sharing without ever owning.
               It&apos;s like having a closet full of things I don&apos;t
-              actually possess. My friends love me, and my wallet does too! "
+              actually possess. My friends love me, and my wallet does too! &quot;
             </p>
           </blockquote>
           <figcaption className="mt-6 flex items-center justify-center space-x-3">

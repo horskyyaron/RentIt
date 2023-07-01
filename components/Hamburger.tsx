@@ -1,9 +1,5 @@
 "use client";
 
-const menu = document.querySelector("#menu3");
-console.log(menu)
-
-
 export default function HamburgerMenuButton() {
   return (
     <svg
@@ -14,6 +10,7 @@ export default function HamburgerMenuButton() {
       stroke="currentColor"
       className="mr-5 h-6 w-6 md:hidden"
       onClick={() => {
+        const menu = document.querySelector("#menu_vertical");
         if (menu?.classList.contains("hidden")) {
           menu.classList.remove("hidden");
         } else {
