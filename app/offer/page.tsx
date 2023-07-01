@@ -209,7 +209,7 @@ export default function OfferPage() {
         open={open}
         autoHideDuration={2500}
         onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert severity="success" sx={{ width: "100%" }}>
           Your item was published successfully!
