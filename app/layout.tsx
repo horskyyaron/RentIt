@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
+// import { Providers } from "./providers";
 
 export const metadata = {
   title: {
@@ -19,19 +20,21 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body>
-          <div className="flex min-h-screen flex-col">
-            <header className="bg-gray-900 px-6 py-2">
-              <Navbar />
-            </header>
-            <main className="flex-grow bg-gradient-to-r from-gray-800 to-indigo-800 font-sans">
+          {/* <Providers> */}
+            <div className="flex min-h-screen flex-col">
+              <header className="bg-gray-600 ">
+                <Navbar />
+              </header>
+              <main className="flex-grow">
                 {children}
-            </main>
-            <footer className="bg-gray-900 px-6 py-4 text-white">
-              <h1>footer</h1>
-            </footer>
-          </div>
+              </main>
+              <footer className="bg-gray-900 px-6 py-4 text-white">
+                <h1>footer</h1>
+              </footer>
+            </div>
+          {/* </Providers> */}
         </body>
       </html>
     </ClerkProvider>

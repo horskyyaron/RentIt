@@ -1,6 +1,3 @@
-export default async function Dashboard() {
-    return (
-        <h1>this is a cool dashboard page</h1>
-    )
+export default function dashboard() {
+    return <h1>dashboard</h1>
 }
-

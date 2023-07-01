@@ -3,74 +3,140 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/app/favicon_io/android-chrome-192x192.png";
+import HamburgerMenuButton from "./Hamburger";
 
 export default async function Navbar() {
   const user = await currentUser();
 
   return (
-    <nav className="flex items-center justify-between bg-gray-900 text-white px-6 shadow">
-      <div className="text-xl font-bold">
-        <Link href="/">
-          <Image
-            src={logo}
-            key={"logo"}
-            id="logo"
-            alt=""
-            className="rounded-full"
-            width={40}
-            height={40}
-          />
-        </Link>
-      </div>
+    <>
+      <nav className="mb-2 mt-2 flex  items-center justify-between px-6 text-white shadow ">
+        <div className="text-xl font-bold">
+          <Link href="/">
+            <Image
+              src={logo}
+              key={"logo"}
+              id="logo"
+              alt=""
+              className="rounded-full"
+              width={40}
+              height={40}
+            />
+          </Link>
+        </div>
 
-      <ul className="flex space-x-4 items-center">
+        <ul className="m hidden md:flex md:space-x-3">
+          <li>
+            <Link href="/about" className="text-lg hover:text-gray-300">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/why" className="text-lg hover:text-gray-300">
+              Why?
+            </Link>
+          </li>
+          <li>
+            <Link href="/how" className="text-lg hover:text-gray-300">
+              How?
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/renting-portal"
+              className="text-lg hover:text-gray-300"
+            >
+              Portal
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact" className="text-lg hover:text-gray-300">
+              Contact
+            </Link>
+          </li>
+          {!user ? (
+            <li>
+              <Link href="/sign-in/" className="text-lg hover:text-gray-300">
+                Log-In
+              </Link>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link href="/ask" className="text-lg hover:text-gray-300">
+                  Ask
+                </Link>
+              </li>
+              <li>
+                <Link href="/offer" className="text-lg hover:text-gray-300">
+                  Offer
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="text-lg hover:text-gray-300">
+                  dashboard
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+        <span className="flex items-center">
+          <HamburgerMenuButton />
+          <UserButton afterSignOutUrl="/" />
+        </span>
+      </nav>
+      <ul className="hidden " id="menu3">
         <li>
-          <Link href="/about" className="hover:text-gray-300 text-lg">
+          <Link href="/about" className="text-lg hover:text-gray-300">
             About
           </Link>
         </li>
         <li>
-          <Link href="/why" className="hover:text-gray-300 text-lg">
+          <Link href="/why" className="text-lg hover:text-gray-300">
             Why Rent?
           </Link>
         </li>
         <li>
-          <Link href="/how" className="hover:text-gray-300 text-lg">
+          <Link href="/how" className="text-lg hover:text-gray-300">
             How Does This Works?
           </Link>
         </li>
         <li>
-          <Link href="/renting-portal" className="hover:text-gray-300 text-lg">
-            Renting Portal
+          <Link href="/renting-portal" className="text-lg hover:text-gray-300">
+            Portal
           </Link>
         </li>
         <li>
-          <Link href="/contact" className="hover:text-gray-300 text-lg">
+          <Link href="/contact" className="text-lg hover:text-gray-300">
             Contact
           </Link>
         </li>
         {!user ? (
           <li>
-            <Link href="/sign-in/" className="hover:text-gray-300 text-lg">
+            <Link href="/sign-in/" className="text-lg hover:text-gray-300">
               Log-In
             </Link>
           </li>
         ) : (
           <>
             <li>
-              <Link href="/ask" className="hover:text-gray-300 text-lg">
+              <Link href="/ask" className="text-lg hover:text-gray-300">
                 Ask
               </Link>
             </li>
             <li>
-              <Link href="/offer" className="hover:text-gray-300 text-lg">
+              <Link href="/offer" className="text-lg hover:text-gray-300">
                 Offer
               </Link>
             </li>
-            <UserButton afterSignOutUrl="/" />
+            <li>
+              <Link href="/dashboard" className="text-lg hover:text-gray-300">
+                dashboard
+              </Link>
+            </li>
           </>
         )}
       </ul>
-    </nav>
+    </>
   );
 }
