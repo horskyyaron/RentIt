@@ -4,7 +4,7 @@ export const metadata = {
 
 export default async function About() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen text-rent_bonus">
       <h1 className="text-4xl font-bold mb-8">About Us</h1>
       <p className="text-lg max-w-md text-center">
         Welcome to our renting web application! We provide a convenient platform for users to rent and offer various items for rent. Whether you&apos;re looking to rent out your unused items or in need of renting something for a short period, our application has got you covered.

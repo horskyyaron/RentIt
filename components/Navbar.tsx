@@ -7,74 +7,98 @@ import VerticalMenu from "./MenuVertical";
 import Logo from "./Logo";
 
 export default async function Navbar() {
-  const user = await currentUser();
+    const user = await currentUser();
 
-  return (
-    <>
-      <nav className="mb-2 mt-2 flex  items-center justify-between px-6 text-white shadow ">
-        <Logo width={40} height={40} />
+    return (
+        <>
+            <nav className="flex items-center justify-between  bg-gray-300 px-6 pb-2 pt-2 font-semibold shadow">
+                <Logo width={40} height={40} />
 
-        <ul className="m hidden md:flex md:space-x-3">
-          <li>
-            <Link href="/about" className="text-lg hover:text-gray-300">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/why" className="text-lg hover:text-gray-300">
-              Why?
-            </Link>
-          </li>
-          <li>
-            <Link href="/how" className="text-lg hover:text-gray-300">
-              How?
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/renting-portal"
-              className="text-lg hover:text-gray-300"
-            >
-              Portal
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact" className="text-lg hover:text-gray-300">
-              Contact
-            </Link>
-          </li>
-          {!user ? (
-            <li>
-              <Link href="/sign-in/" className="text-lg hover:text-gray-300">
-                Log-In
-              </Link>
-            </li>
-          ) : (
-            <>
-              <li>
-                <Link href="/ask" className="text-lg hover:text-gray-300">
-                  Ask
-                </Link>
-              </li>
-              <li>
-                <Link href="/offer" className="text-lg hover:text-gray-300">
-                  Offer
-                </Link>
-              </li>
-              <li>
-                <Link href="/dashboard" className="text-lg hover:text-gray-300">
-                  dashboard
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-        <span className="flex items-center">
-          <HamburgerMenuButton />
-          <UserButton afterSignOutUrl="/" />
-        </span>
-      </nav>
-      <VerticalMenu isLoggedIn={user ? true : false} />
-    </>
-  );
+                <ul className="hidden md:flex md:space-x-3 ">
+                    <li>
+                        <Link
+                            href="/about"
+                            className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                        >
+                            About
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="/why"
+                            className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                        >
+                            Why?
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="/how"
+                            className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                        >
+                            How?
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="/renting-portal"
+                            className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                        >
+                            Portal
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href="/contact"
+                            className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                        >
+                            Contact
+                        </Link>
+                    </li>
+                    {!user ? (
+                        <li>
+                            <Link
+                                href="/sign-in"
+                                className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                            >
+                                Login
+                            </Link>
+                        </li>
+                    ) : (
+                        <>
+                            <li>
+                                <Link
+                                    href="/ask"
+                                    className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                                >
+                                    Ask
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/offer"
+                                    className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                                >
+                                    Offer
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/dashboard"
+                                    className="btn border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
+                                >
+                                    dashboard
+                                </Link>
+                            </li>
+                        </>
+                    )}
+                </ul>
+                <span className="flex items-center">
+                    <HamburgerMenuButton />
+                    <UserButton afterSignOutUrl="/" />
+                </span>
+            </nav>
+            <VerticalMenu isLoggedIn={user ? true : false} />
+        </>
+    );
 }

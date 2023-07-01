@@ -24,10 +24,10 @@ export default function RootLayout({
         <body>
           {/* <Providers> */}
             <div className="flex min-h-screen flex-col">
-              <header className="bg-gray-600 ">
+              <header>
                 <Navbar />
               </header>
-              <main className="flex-grow">
+              <main className="flex-grow bg-rent_primary">
                 {children}
               </main>
               <footer className="bg-gray-900 px-6 py-4 text-white">

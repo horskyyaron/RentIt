@@ -16,6 +16,7 @@ model User {
     RentingQueryCard RentingQueryCard[]
     createdAt        DateTime           @default(now())
     updatedAt        DateTime           @updatedAt
+    coins            Int
 }
 
 model Item {

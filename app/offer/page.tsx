@@ -205,7 +205,12 @@ export default function OfferPage() {
           </Button>
         </div>
       </form>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: "top", horizontal:"center"}}>
+      <Snackbar
+        open={open}
+        autoHideDuration={2500}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
         <Alert severity="success" sx={{ width: "100%" }}>
           Your item was published successfully!
         </Alert>

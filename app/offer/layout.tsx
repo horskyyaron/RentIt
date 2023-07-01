@@ -6,9 +6,13 @@ export default function RootLayout({
 }) {
   return (
     <div className="mt-5 flex flex-col items-center justify-center">
-      <h1 className="mb-8 text-4xl font-bold text-white">
-        Publish Item for Rent!
+      <h1 className="mb-3 font-ysabeau text-4xl font-bold">
+        Rent an item for someone in need!
       </h1>
+      <p className="font-ysabeau text-sm font-semibold mb-3">
+        and get paid with coins of course :) which you can use for yourself
+        later.
+      </p>
       <div className="w-4/5 max-w-xl rounded-lg bg-white p-8 shadow-lg sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
         {children}
       </div>

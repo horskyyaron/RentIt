@@ -207,7 +207,7 @@ export default function AskPage() {
       </form>
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={2500}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >

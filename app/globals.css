@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn {
+  @apply cursor-pointer rounded-full px-2 py-1 text-xs font-bold uppercase tracking-wide;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

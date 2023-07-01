@@ -16,8 +16,9 @@ export default async function Gallery() {
 
   if (cards.length == 0) {
     return (
-      <div className="text-white flex flex-col items-center justify-center mt-24">
-        <h1 className="text-4xl font-bold mb-8">No offers so far</h1>
+      <div className="flex flex-col items-center justify-center mt-24">
+        <h1 className="text-4xl font-bold font-ysabeau mb-8">No available requests or offers so far...</h1>
+        <h2 className="text-xl font-ysabeau mt-2">What are you waiting for? go and rent something or ask for an item yourself!</h2>
       </div>
     );
   } else {
