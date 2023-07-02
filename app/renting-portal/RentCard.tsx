@@ -15,13 +15,10 @@ export default async function RentCard({ card }: { card: CardType }) {
       <div
         className={`${
           card.type == "OFFER" ? "bg-purple-800" : "bg-blue-800"
-        } relative overflow-hidden rounded-lg border-2 border-black shadow-md  `}
+        } overflow-hidden rounded-lg border-2 border-black shadow-md  `}
       >
-        {/* <div className="mb-2 mt-2 flex items-center justify-center"> */}
-        {/*   <h1 className="text-center text-white">{card.item.name}</h1> */}
-        {/* </div> */}
         <div className="text-white">
-          <div className="aspect-square">
+          <div className="relative aspect-square">
             <BlurImage img_url={card.item.images[0].fileUrl} />
           </div>
           <div className="flex items-center justify-center border-b font-ysabeau text-xl font-bold">
