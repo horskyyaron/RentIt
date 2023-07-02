@@ -21,7 +21,7 @@ export type CardType = {
   proposerId: string;
   applyerId: string | null;
   rentPerDay: number,
-  RentingDays: RentingDay[]
+  rentingDays: RentingDay[]
   type: "OFFER" | "ASK";
   createdAt: Date;
   updatedAt: Date;
