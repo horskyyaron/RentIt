@@ -1,42 +1,49 @@
 import prisma from "@/lib/db";
+import { CardInitData } from "@/lib/types";
 import { currentUser } from "@clerk/nextjs";
-import { QueryType } from "@prisma/client";
+import { RentStatus, TransactionType } from "@prisma/client";
 import { NextResponse } from "next/server";
-
-type CardData = {
-  clerk_id: string;
-  item_name: string;
-  description: string;
-  rent: number;
-  startDate: string;
-  endDate: string;
-  uploadingthing_data: [
-    {
-      fileKey: string;
-      fileUrl: string;
-    }
-  ];
-};
+import { eachDayOfInterval, format } from "date-fns";
 
 export async function POST(req: Request) {
   //get data from body
-  const { item_name, description, rent, uploadingthing_data, endDate, startDate } =
-    (await req.json()) as CardData;
+  const {
+    item_name,
+    description,
+    rent,
+    uploadingthing_data,
+    endDate,
+    startDate,
+  } = (await req.json()) as CardInitData;
 
-  console.log(endDate, startDate)
-  
+  const dates_range = eachDayOfInterval({
+    start: new Date(startDate),
+    end: new Date(endDate),
+  });
+
+  const formattedDates = dates_range.map((date) => format(date, "dd/MM/yyyy"));
+  console.log(formattedDates);
+
+  const dates_data = formattedDates.map((date) => ({
+    date: new Date(date),
+    rentingStatus: RentStatus.AVAILABLE,
+  }));
+
   try {
     const user = await currentUser();
     if (!user) throw new Error("user not connected");
-    const card = await prisma.rentingQueryCard.create({
+    const card = await prisma.rentCard.create({
       data: {
         proposerId: user.id,
-        type: QueryType.OFFER,
+        type: TransactionType.OFFER,
+        rentPerDay: Number(rent),
+        rentingDays: {
+          create: dates_data,
+        },
         item: {
           create: {
             name: item_name,
             description: description,
-            rentPerDay: Number(rent),
             ownerId: user.id,
             images: {
               createMany: {
@@ -47,8 +54,13 @@ export async function POST(req: Request) {
         },
       },
     });
+    console.log("[SERVER]: prisma query succesfull");
+
     return NextResponse.json({ msg: "db updated sucessfully" });
   } catch (e) {
+    console.log("[SERVER]: prisma query ERROR");
+    console.log(e);
+
     return NextResponse.json({ error: e });
   }
 }

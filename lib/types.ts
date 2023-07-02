@@ -26,3 +26,18 @@ export type CardType = {
     updatedAt: Date;
     item: Item;
 };
+
+export type CardInitData = {
+  clerk_id: string;
+  item_name: string;
+  description: string;
+  rent: number;
+  startDate: string;
+  endDate: string;
+  uploadingthing_data: [
+    {
+      fileKey: string;
+      fileUrl: string;
+    }
+  ];
+};

@@ -11,10 +11,12 @@ async function resetDatabase() {
         console.log("deleting images...")
         await prisma.item.deleteMany();
         console.log("deleting item...")
-        await prisma.rentingQueryCard.deleteMany();
+        await prisma.rentCard.deleteMany();
         console.log("deleting card...")
         await prisma.user.deleteMany();
         console.log("deleting user...")
+        await prisma.rentingDay.deleteMany();
+        console.log("deleting renting days...")
 
         console.log('Database reset completed.');
     } catch (error) {

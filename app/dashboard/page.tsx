@@ -3,8 +3,8 @@ import { currentUser } from "@clerk/nextjs";
 import ErrorPage from "../error";
 import { Box, CircleDollarSign, HeartHandshake } from "lucide-react";
 import StatCard from "./comp";
-import OnGoingCards from "./ongoing";
 import { Prisma } from "@prisma/client";
+import OnGoingCards from "./OnGoingCards";
 
 export default async function Dashboard() {
     try {

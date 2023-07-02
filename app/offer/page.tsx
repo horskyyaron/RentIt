@@ -58,8 +58,8 @@ export default function OfferPage() {
     //getting the dates
     const { dates, item_description, item_name, rent } = data;
     let [from, to] = dates;
-    from = dayjs(from).format("DD/MM/YYYY");
-    to = dayjs(to).format("DD/MM/YYYY");
+    from = dayjs(from).format("YYYY/MM/DD");
+    to = dayjs(to).format("YYYY/MM/DD");
 
     if (files.length == 0) {
       alert("add at least one image to send!");
@@ -75,6 +75,8 @@ export default function OfferPage() {
             item_name: item_name,
             description: item_description,
             rent: rent,
+            startDate: from,
+            endDate: to,
             uploadingthing_data: ut_data,
           }),
           headers: {
@@ -86,6 +88,8 @@ export default function OfferPage() {
         const { msg, error } = await res.json();
         if (error) {
           console.log("there was an error");
+          console.log(error)
+          
         } else {
           console.log("db updated!!!!");
         }
