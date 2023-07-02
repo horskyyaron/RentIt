@@ -21,10 +21,12 @@ export default function DateEntry({
                     handleSelect(date.id);
                 }}
             >
-                <div className="bg-green-300 p-5">
+                <div
+                    className={` ${isSelected ? "border-2 border-black bg-green-600" : "bg-green-300"
+                        }  p-5`}
+                >
                     {dayjs(date.date).format("MM/DD/YYYY")}
                 </div>
-                {isSelected && <h1>selected!</h1>}
             </button>
         );
     } else {
