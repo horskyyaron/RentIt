@@ -4,7 +4,7 @@ export const metadata = {
 
 export default async function About() {
     return (
-        <div className="text-rent_bonus flex h-screen flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
             <h1 className="mb-8 text-4xl font-bold">About Us</h1>
             <p className="max-w-md text-center text-lg">
                 Welcome to our renting web application! We provide a convenient platform

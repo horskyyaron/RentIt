@@ -7,7 +7,15 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { CardType } from "@/lib/types";
 dayjs.extend(relativeTime);
 
-export default async function RentCard({ card }: { card: CardType }) {
+export default async function RentCard({
+    card,
+    currentUserId,
+}: {
+    card: CardType;
+    currentUserId?: string;
+}) {
+    console.log(currentUserId)
+    
     const user = await clerkClient.users.getUser(card.proposerId);
 
     return (

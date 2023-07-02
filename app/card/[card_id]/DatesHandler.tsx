@@ -4,6 +4,7 @@ import DateEntry from "./DateEntry";
 import { useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function DatesHandler({
     dates,
@@ -18,6 +19,7 @@ export default function DatesHandler({
     const [openError, setOpenError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [isScheduling, setIsScheduling] = useState(false);
+    const [email, setEmail] = useState("");
 
     const router = useRouter();
 
@@ -66,16 +68,22 @@ export default function DatesHandler({
                 },
                 method: "POST",
             });
-            const { msg, error } = await res.json();
+            const { msg, error, email } = await res.json();
+
+            console.log(msg, error, email);
+            setEmail(email);
+
             if (!error) {
                 setOpenSuccess(true);
-                setTimeout(() => {
-                    router.refresh()
-                }, 3000);
+                // refresh page after 3 seconds when successfull.
+                // setTimeout(() => {
+                //     router.refresh()
+                // }, 3000);
             }
         } catch (error) {
             console.log(error);
             alert("there was an error, please refresh and try again");
+            setIsScheduling(false);
         } finally {
             setIsScheduling(false);
         }
@@ -83,6 +91,17 @@ export default function DatesHandler({
 
     return (
         <div>
+            {email && (
+                <div className="mb-6 flex flex-col items-center justify-center rounded-lg border-2 border-red-500 bg-yellow-300 p-4">
+                    <h1 className="font-ysabeau text-3xl font-bold">
+                        Congratulations, you have scheduled your item!
+                    </h1>
+                    <h2>You can reach the owner through this email address below:</h2>
+                    <Link href={"mailto:horsky.yaron@gmail.com"}>
+                        <p className="mt-3 font-bold">{email}</p>
+                    </Link>
+                </div>
+            )}
             <div className="flex items-center justify-center">
                 <button
                     className="btn mb-3 border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
