@@ -5,14 +5,6 @@ import { currentUser } from "@clerk/nextjs";
 export const revalidate = 60; // revalidate this page every 60 seconds
 
 export default async function Gallery() {
-  const user = await currentUser().then(async (clerk) => {
-    return prisma.user.findUnique({
-      where: {
-        clerkId: clerk?.id,
-      },
-    });
-  });
-
   const cards = await prisma.rentCard.findMany({
     include: {
       item: {
