@@ -14,9 +14,6 @@ export default async function Gallery() {
   });
 
   const cards = await prisma.rentCard.findMany({
-    where: {
-      proposerId: user?.clerkId,
-    },
     include: {
       item: {
         include: {

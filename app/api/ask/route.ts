@@ -24,7 +24,6 @@ export async function POST(req: Request) {
   });
 
   const formattedDates = dates_range.map((date) => format(date, "dd/MM/yyyy"));
-  console.log(formattedDates);
 
   const dates_data = formattedDates.map((date) => ({
     date: new Date(date),
