@@ -3,19 +3,38 @@ import { currentUser } from "@clerk/nextjs";
 import ErrorPage from "../error";
 import { Box, CircleDollarSign, HeartHandshake } from "lucide-react";
 import StatCard from "./comp";
+import OnGoingCards from "./ongoing";
+
 
 export default async function Dashboard() {
     try {
-        // const user = await currentUser().then(async (clerk) => {
-        //     return prisma.user.findUnique({
-        //         where: {
-        //             clerkId: clerk?.id,
-        //         },
-        //     });
-        // });
+        const user = await currentUser().then(async (clerk) => {
+            return prisma.user.findUnique({
+                where: {
+                    clerkId: clerk?.id,
+                },
+            });
+        });
+
+        const cards = await prisma.rentingQueryCard.findMany({
+            where: {
+                proposerId: user?.clerkId,
+            },
+            include: {
+                item: {
+                    include: {
+                        images: true,
+                    },
+                },
+            },
+        });
+
         return (
             <div>
-                <div id="stats" className="sm:flex sm:justify-between">
+                <div
+                    id="stats"
+                    className="sm:flex sm:flex-grow sm:justify-between sm:space-x-2"
+                >
                     <StatCard
                         title="Times Rented"
                         value={200}
@@ -48,9 +67,11 @@ export default async function Dashboard() {
                         }
                     />
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
-                    <StatCard title="upcoming transactions" value={200} />
-                    <StatCard title="last transactions" value={200} />
+                <div className="grid gap-4 lg:grid-cols-3">
+                <OnGoingCards cards={cards}/>
+                    <StatCard title="Open Cards" value={200} />
+                    {/* <StatCard title="Ongoing Transactions" value={200} /> */}
+                    {/* <StatCard title="History" value={200} /> */}
                 </div>
             </div>
         );

@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function VerticalMenu({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <ul
-      className="hidden "
+      className="hidden flex flex-col justify-center items-center"
       id="menu_vertical"
       onClick={() => {
         const menu = document.querySelector("#menu_vertical");

@@ -12,7 +12,7 @@ export default function StatCard({
 }) {
     return (
         <div className="flex flex-col">
-            <div className="ml-3 mr-3 mt-3 rounded-lg border-2 border-black bg-white p-4 shadow-md">
+            <div className="ml-3 mr-3 mt-3 rounded-lg border-2 border-black bg-white p-2 shadow-md">
                 <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-xl font-bold">{title}</h2>
                     {svgComp}
