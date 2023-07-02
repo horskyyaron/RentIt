@@ -31,7 +31,7 @@ export default function OnGoingCards({ cards }: { cards: CardType[] }) {
               <TableCell className="font-medium">{card.item.name}</TableCell>
               <TableCell>{card.type}</TableCell>
               <TableCell className="text-right">
-                {card.item.rentPerDay} 🪙
+                {card.rentPerDay} 🪙
               </TableCell>
             </TableRow>
           ))}

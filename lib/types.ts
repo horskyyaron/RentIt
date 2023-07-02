@@ -1,30 +1,41 @@
 export type Image = {
-    fileKey: string;
-    fileUrl: string;
-    itemId: number;
-    createdAt: Date;
-    updatedAt: Date;
+  fileKey: string;
+  fileUrl: string;
+  itemId: number;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type Item = {
-    id: number;
-    name: string;
-    description: string;
-    rentPerDay: number;
-    ownerId: string;
-    createdAt: Date;
-    updatedAt: Date;
-    images: Image[];
+  id: number;
+  name: string;
+  description: string;
+  ownerId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  images: Image[];
 };
 
 export type CardType = {
-    id: number;
-    proposerId: string;
-    applyerId: string | null;
-    type: string;
-    createdAt: Date;
-    updatedAt: Date;
-    item: Item;
+  id: number;
+  proposerId: string;
+  applyerId: string | null;
+  rentPerDay: number,
+  RentingDays: RentingDay[]
+  type: "OFFER" | "ASK";
+  createdAt: Date;
+  updatedAt: Date;
+  item: Item;
+
+};
+
+export type RentingDay = {
+  id: number;
+  date: Date;
+  rentingCardId: number;
+  rentingStatus: "AVAILABLE" | "TAKEN";
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type CardInitData = {

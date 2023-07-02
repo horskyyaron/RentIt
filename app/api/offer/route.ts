@@ -55,7 +55,6 @@ export async function POST(req: Request) {
       },
     });
     console.log("[SERVER]: prisma query succesfull");
-
     return NextResponse.json({ msg: "db updated sucessfully" });
   } catch (e) {
     console.log("[SERVER]: prisma query ERROR");
