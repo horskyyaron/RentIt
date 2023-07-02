@@ -18,7 +18,6 @@ export async function POST(req: Request) {
 
     const user = await clerkClient.users.getUser(card?.proposerId || "");
     const ownerEmail = user.emailAddresses[0].emailAddress;
-    return NextResponse.json({ msg: "schedule succeeded", email: ownerEmail });
 
     try {
         const res = await prisma.rentingDay.updateMany({
