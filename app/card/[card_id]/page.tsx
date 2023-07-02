@@ -72,7 +72,7 @@ export default async function CardPage({
             </p>
 
             {/* @ts-ignore */}
-            <DatesHandler dates={dates}/>
+            <DatesHandler dates={dates} cardId={card?.id}/>
         </div>
     );
 }

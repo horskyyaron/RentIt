@@ -4,7 +4,15 @@ import DateEntry from "./DateEntry";
 import { useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
 
-export default function DatesHandler({ dates }: { dates: RentingDay[] }) {
+export default function DatesHandler({
+    dates,
+    cardId,
+}: {
+    dates: RentingDay[];
+    cardId: number;
+}) {
+    console.log();
+
     const [selected, setSelected] = useState<Array<number>>([]);
     const [open, setOpen] = useState(false);
 
@@ -23,12 +31,27 @@ export default function DatesHandler({ dates }: { dates: RentingDay[] }) {
         if (reason === "clickaway") {
             return;
         }
-
         setOpen(false);
     };
     const handleSubmit = async () => {
         if (selected.length == 0) {
             setOpen(true);
+            return;
+        }
+        try {
+            const res = await fetch("/api/schedule", {
+                body: JSON.stringify({
+                    ids: selected,
+                    cardId: cardId,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+            });
+            console.log(await res.json());
+        } catch (error) {
+            console.log("there was an error", error);
         }
         // try {
         ////upload to uploadthing server
@@ -68,11 +91,12 @@ export default function DatesHandler({ dates }: { dates: RentingDay[] }) {
         <div>
             <div className="flex items-center justify-center">
                 <button
+                    className="btn mb-3 border-2 border-black transition duration-500 ease-out hover:bg-gray-600 hover:text-white"
                     onClick={() => {
                         handleSubmit();
                     }}
                 >
-                    click me
+                    Schedule
                 </button>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
