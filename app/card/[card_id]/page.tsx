@@ -5,6 +5,7 @@ import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import DateEntry from "./DateEntry";
+import DatesHandler from "./DatesHandler";
 dayjs.extend(relativeTime);
 
 export default async function CardPage({
@@ -30,13 +31,8 @@ export default async function CardPage({
     });
 
     const user = await clerkClient.users.getUser(card?.proposerId || "");
-
     const images = card?.item?.images;
     const dates = card?.rentingDays;
-
-    if (dates) {
-        console.log(dayjs(dates[0].date).format("DD/MM/YYYY"));
-    }
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -70,13 +66,13 @@ export default async function CardPage({
 
             <h1 className="mb-4 mt-8 text-2xl font-semibold">Availability:</h1>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {/* Loop through your items */}
-                {dates &&
-                    dates.map((d) => {
-                        return <DateEntry date={d} key={d.id} />;
-                    })}
-            </div>
+            <p className="mx-5 mb-5">
+                click on the dates that you want to schedule. when ready, click on the
+                schedule button
+            </p>
+
+            {/* @ts-ignore */}
+            <DatesHandler dates={dates}/>
         </div>
     );
 }
