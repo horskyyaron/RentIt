@@ -1,5 +1,9 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+ 
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 
 export function formatSize(sizeInBytes: number) {
   const kilobyte = 1024;
@@ -13,8 +17,3 @@ export function formatSize(sizeInBytes: number) {
     return (sizeInBytes / megabyte).toFixed(2) + " MB";
   }
 }
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
