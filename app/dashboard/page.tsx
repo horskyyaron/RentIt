@@ -70,7 +70,7 @@ export default async function Dashboard() {
         {/*         } */}
         {/*     /> */}
         {/* </div> */}
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="sm:m-16 md:m-20">
           {/* @ts-ignore */}
           <OnGoingCards cards={cards} />
         </div>
