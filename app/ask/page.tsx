@@ -61,6 +61,9 @@ export default function AskPage() {
     from = dayjs(from).format("YYYY/MM/DD");
     to = dayjs(to).format("YYYY/MM/DD");
 
+    console.log(to, from)
+    
+
     if (files.length == 0) {
       alert("add at least one image to send!");
       return;
