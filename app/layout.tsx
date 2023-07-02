@@ -30,9 +30,9 @@ export default function RootLayout({
               <main className="flex-grow bg-rent_primary">
                 {children}
               </main>
-              <footer className="bg-gray-900 px-6 py-4 text-white">
-                <h1>footer</h1>
-              </footer>
+              {/* <footer className="bg-gray-900 px-6 py-4 text-white"> */}
+              {/*   <h1>footer</h1> */}
+              {/* </footer> */}
             </div>
           {/* </Providers> */}
         </body>
