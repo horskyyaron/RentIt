@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,22 +10,22 @@ export default function BlurImage({ img_url }: { img_url: string }) {
   const [isLoading, setLoading] = useState(true);
 
   return (
-    <div className="group">
-      <div className="aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8 w-full overflow-hidden rounded-lg border-2 border-gray-600 bg-gray-200">
+    <Link href="#" className="group">
+      <div className="border-gray-600 border-2 w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
         <Image
           alt=""
           src={img_url}
           fill
           style={{ objectFit: "cover" }}
           className={cn(
-            "duration-700 ease-in-out group-hover:opacity-75",
+            "group-hover:opacity-75 duration-700 ease-in-out",
             isLoading
-              ? "scale-110 blur-2xl grayscale"
-              : "scale-100 blur-0 grayscale-0"
+              ? "grayscale blur-2xl scale-110"
+              : "grayscale-0 blur-0 scale-100"
           )}
           onLoadingComplete={() => setLoading(false)}
         />
       </div>
-    </div>
+    </Link>
   );
 }

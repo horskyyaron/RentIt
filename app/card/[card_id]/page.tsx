@@ -6,14 +6,21 @@ export default async function CardPage({
   params: { card_id: string };
 }) {
   const { card_id } = params;
+
+  //getting card date from the db
   const card = await prisma.rentCard.findUnique({
     where: {
       id: Number(card_id),
     },
+    include: {
+      rentingDays: true,
+      item: true,
+    },
   });
 
-  console.log("[SERVER]: this is the card info");
-  console.log(card);
-
-  return <h1>{card_id}</h1>;
+  return (
+    <div className="flex justify-center items-center mt-6">
+      <h1>{card?.item?.name}</h1>
+    </div>
+  );
 }
