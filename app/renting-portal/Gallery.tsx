@@ -6,6 +6,10 @@ export const revalidate = 60; // revalidate this page every 60 seconds
 
 export default async function Gallery() {
 
+    const user = await currentUser()
+    console.log(user?.id)
+    
+
     const cards = await prisma.rentCard.findMany({
         include: {
             item: {
@@ -35,7 +39,7 @@ export default async function Gallery() {
                 {cards.map((card) => (
                     <div key={card.id}>
                         {/* @ts-ignore */}
-                        <RentCard card={card}/>
+                        <RentCard card={card} currentUserId={user?.id}/>
                     </div>
                 ))}
             </div>

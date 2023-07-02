@@ -14,12 +14,11 @@ export default async function RentCard({
     card: CardType;
     currentUserId?: string;
 }) {
-    console.log(currentUserId)
     
     const user = await clerkClient.users.getUser(card.proposerId);
 
     return (
-        <Link href={`/card/${card.id}`}>
+        <Link href={user.id != currentUserId ? `/card/${card.id}` : `#`} >
             <div
                 className={`overflow-hidden rounded-lg border-2 border-black shadow-md ${card.type == "OFFER" ? "bg-purple-900" : "bg-zinc-700"
                     } `}
@@ -59,6 +58,7 @@ export default async function RentCard({
                         />
                         <p className="font-ysabeau text-lg font-semibold">
                             {user.username ? user.username : user.firstName}
+                            {user.id == currentUserId && '(YOU)'}
                         </p>
                     </div>
                     <div>
