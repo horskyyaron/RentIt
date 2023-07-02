@@ -40,7 +40,7 @@ export default async function Gallery() {
     return (
       <div className="m-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-x-8">
         {cards.map((card) => (
-          <div key={card.id} className="mb-1">
+          <div key={card.id}>
             {/* @ts-ignore */}
             <RentCard card={card} />
           </div>
