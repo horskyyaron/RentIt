@@ -85,9 +85,6 @@ export default async function Home() {
             </div>
           </figcaption>
         </figure>
-        <button className="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
-          Get Started
-        </button>
       </div>
     </div>
   );

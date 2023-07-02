@@ -97,7 +97,7 @@ export default function DatesHandler({
                         Congratulations, you have scheduled your item!
                     </h1>
                     <h2>You can reach the owner through this email address below:</h2>
-                    <Link href={"mailto:horsky.yaron@gmail.com"}>
+                    <Link href={`mailto:${email}`}>
                         <p className="mt-3 font-bold">{email}</p>
                     </Link>
                 </div>
@@ -113,7 +113,7 @@ export default function DatesHandler({
                     {isScheduling ? "scheduling..." : "Schedule"}
                 </button>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {dates &&
                     dates.map((d) => {
                         return (
