@@ -21,7 +21,7 @@ export default async function RentCard({ card }: { card: CardType }) {
         {/*   <h1 className="text-center text-white">{card.item.name}</h1> */}
         {/* </div> */}
         <div className="text-white">
-          <div className="relative aspect-square">
+          <div className="aspect-square">
             <BlurImage img_url={card.item.images[0].fileUrl} />
           </div>
           <div className="flex items-center justify-center border-b font-ysabeau text-xl font-bold">
