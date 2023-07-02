@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import ImageCarousel from "./Carousel";
 
 export default async function CardPage({
   params,
@@ -19,8 +20,9 @@ export default async function CardPage({
   });
 
   return (
-    <div className="flex justify-center items-center mt-6">
+    <div className="mt-6 flex items-center justify-center">
       <h1>{card?.item?.name}</h1>
+      <ImageCarousel />
     </div>
   );
 }

@@ -30,7 +30,6 @@ export default async function Dashboard() {
       },
     });
 
-    console.log(cards[0].rentingDays)
     
 
     return (

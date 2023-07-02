@@ -13,7 +13,7 @@ export default async function RentCard({ card }: { card: CardType }) {
   return (
     <Link href={`/card/${card.id}`}>
       <div className="overflow-hidden rounded-lg border-2 border-black shadow-md">
-        <div className="text-white">
+        <div className="px-5 text-white">
           <div className="relative aspect-square">
             <BlurImage img_url={card.item.images[0].fileUrl} />
           </div>

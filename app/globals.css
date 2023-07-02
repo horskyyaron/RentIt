@@ -6,9 +6,9 @@
 @tailwind utilities;
 
  
-.card {
-    @apply bg-white rounded-lg overflow-hidden shadow-md relative
-}
+/* .card { */
+/*     @apply bg-white rounded-lg overflow-hidden shadow-md relative */
+/* } */
 
 
 /* .badge { */
